@@ -1,0 +1,30 @@
+<div class="recipe-form">
+  <h2>Edit Recipe</h2>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <label for="name">Name:</label>
+    <input id="name" formControlName="name" type="text" />
+
+    <label for="description">Description:</label>
+    <input id="description" formControlName="description" type="text" />
+
+    <label for="ingredients">Ingredients:</label>
+    <textarea id="ingredients" formControlName="ingredients"></textarea>
+
+    <label for="instructions">Instructions:</label>
+    <textarea id="instructions" formControlName="instructions"></textarea>
+
+    <label for="thumbnail">Thumbnail URL:</label>
+    <input id="thumbnail" formControlName="thumbnail" type="text" />
+
+    <button type="submit" [disabled]="recipeForm.invalid || loading">
+      Update Recipe
+    </button>
+  </form>
+</div>

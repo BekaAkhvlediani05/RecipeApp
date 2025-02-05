@@ -1,0 +1,36 @@
+<div class="recipe-form">
+  <h2>Add New Recipe</h2>
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <label for="name">Name:</label>
+    <input id="name" formControlName="name" type="text" />
+    <div *ngIf="recipeForm.controls['name'].invalid && recipeForm.controls['name'].touched">
+      <small>Name is required</small>
+    </div>
+
+    <label for="description">Description:</label>
+    <input id="description" formControlName="description" type="text" />
+    <div *ngIf="recipeForm.controls['description'].invalid && recipeForm.controls['description'].touched">
+      <small>Description is required</small>
+    </div>
+
+    <label for="ingredients">Ingredients:</label>
+    <textarea id="ingredients" formControlName="ingredients"></textarea>
+    <div *ngIf="recipeForm.controls['ingredients'].invalid && recipeForm.controls['ingredients'].touched">
+      <small>Ingredients are required</small>
+    </div>
+
+    <label for="instructions">Instructions:</label>
+    <textarea id="instructions" formControlName="instructions"></textarea>
+    <div *ngIf="recipeForm.controls['instructions'].invalid && recipeForm.controls['instructions'].touched">
+      <small>Instructions are required</small>
+    </div>
+
+    <label for="thumbnail">Thumbnail URL:</label>
+    <input id="thumbnail" formControlName="thumbnail" type="text" />
+    <div *ngIf="recipeForm.controls['thumbnail'].invalid && recipeForm.controls['thumbnail'].touched">
+      <small>Thumbnail URL is required</small>
+    </div>
+
+    <button type="submit" [disabled]="recipeForm.invalid">Add Recipe</button>
+  </form>
+</div>

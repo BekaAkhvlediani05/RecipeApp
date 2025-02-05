@@ -1,0 +1,47 @@
+<div class="search-bar">
+  <input type="text" placeholder="Search recipes..." [(ngModel)]="searchQuery" (input)="filterRecipes()" />
+</div>
+
+<div *ngIf="isAuthenticated">
+  <h2>Favorites</h2>
+  <div class="recipe-list">
+    <div *ngFor="let recipe of favorites" class="recipe-card">
+      <h3 class="recipe-title">{{ recipe.name }}</h3>
+      <img [src]="recipe.thumbnail" alt="{{ recipe.name }} Thumbnail" class="recipe-image" />
+      <p class="recipe-description">{{ recipe.description }}</p>
+      <a [routerLink]="['/recipe', recipe.id]" class="recipe-link">View Recipe</a>
+
+      <div class="recipe-actions">
+        <button (click)="editRecipe(recipe.id)">Edit</button>
+        <button (click)="removeRecipe(recipe.id)">Remove</button>
+
+        <button (click)="toggleFavorite(recipe)">
+          {{ recipe.favorite ? 'Unfavorite' : 'Favorite' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isAuthenticated">
+  <p>Please log in to see and manage your favorites.</p>
+</div>
+
+<h2>All Recipes</h2>
+<div class="recipe-list">
+  <div *ngFor="let recipe of filteredRecipes" class="recipe-card">
+    <h3 class="recipe-title">{{ recipe.name }}</h3>
+    <img [src]="recipe.thumbnail" alt="{{ recipe.name }} Thumbnail" class="recipe-image" />
+    <p class="recipe-description">{{ recipe.description }}</p>
+    <a [routerLink]="['/recipe', recipe.id]" class="recipe-link">View Recipe</a>
+
+    <div class="recipe-actions">
+      <button *ngIf="isAuthenticated" (click)="editRecipe(recipe.id)">Edit</button>
+      <button *ngIf="isAuthenticated" (click)="removeRecipe(recipe.id)">Remove</button>
+
+      <button *ngIf="isAuthenticated" (click)="toggleFavorite(recipe)">
+        {{ recipe.favorite ? 'Unfavorite' : 'Favorite' }}
+      </button>
+    </div>
+  </div>
+</div>
